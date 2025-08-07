@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real-Time GPS Spoof Detection</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='src/styles.css') }}">
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1>Live GPS Monitoring</h1>
+            <div class="status">
+                <div class="signal" id="signalStatus"></div>
+                <span>Updates every 2 seconds</span>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="map-panel">
+                <div id="map"></div>
+                <div class="controls">
+                    <button id="forceJump">Simulate Spoof Jump</button>
+                </div>
+            </div>
+
+            <div class="data-panel">
+                <div class="chart-container">
+                    <canvas id="signalChart"></canvas>
+                </div>
+                <div class="log-container">
+                    <h2>Recent Positions</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Latitude</th>
+                                <th>Longitude</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="alertModal" class="modal">
+            <div class="modal-content">
+                <h2>⚠️ SPOOFING DETECTED!</h2>
+                <p id="alertDetails"></p>
+                <button onclick="document.getElementById('alertModal').style.display='none'">Dismiss</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script type="module" src="../static/src/map.js"></script>
+    <script type="module" src="../static/src/graph.js"></script>
+    <script type="module" src="../static/src/app.js"></script>
+    <script type="module" src="../static/src/alert.js"></script>
+</body>
+</html>
